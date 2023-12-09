@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.Year;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class FilmService {
@@ -33,9 +34,12 @@ public class FilmService {
     public void newFilmShotAndAvailableForRent() {
 
         try (Session session = sessionFactory.getCurrentSession()) {
+            LanguageEntity language = null;
             session.beginTransaction();
-
-            LanguageEntity language = languageDAO.getItems(0, 6).stream().unordered().findAny().get();
+            Optional<LanguageEntity> any = languageDAO.getItems(0, 6).stream().unordered().findAny();
+            if (any.isPresent()) {
+                language = any.get();
+            }
             List<ActorEntity> actors = actorDAO.getItems(0, 10);
             List<CategoryEntity> categorys = categoryDAO.getItems(0, 3);
 
@@ -91,8 +95,7 @@ public class FilmService {
     // --------get-----------------------------------------------------------------
     public FilmEntity getById(Short id) {
         try (Session session = sessionFactory.openSession()) {
-            FilmEntity film = session.get(FilmEntity.class, id);
-            return film;
+            return session.get(FilmEntity.class, id);
         }
     }
 
