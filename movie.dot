@@ -1,0 +1,49 @@
+digraph "movie" {
+
+splines  = ortho;
+fontname = "Inconsolata";
+
+node [colorscheme = ylgnbu4];
+edge [colorscheme = dark28, dir = both];
+
+actor         [shape = record, label = "{ actor |  actor_id : smallint unsigned\l }"];
+address       [shape = record, label = "{ address |  address_id : smallint unsigned\l }"];
+category      [shape = record, label = "{ category |  category_id : tinyint unsigned\l }"];
+city          [shape = record, label = "{ city |  city_id : smallint unsigned\l }"];
+country       [shape = record, label = "{ country |  country_id : smallint unsigned\l }"];
+customer      [shape = record, label = "{ customer |  customer_id : smallint unsigned\l }"];
+film          [shape = record, label = "{ film |  film_id : smallint unsigned\l }"];
+film_actor    [shape = record, label = "{ film_actor |  actor_id : smallint unsigned\l  film_id : smallint unsigned\l }"];
+film_category [shape = record, label = "{ film_category |  film_id : smallint unsigned\l  category_id : tinyint unsigned\l }"];
+film_text     [shape = record, label = "{ film_text |  film_id : smallint\l }"];
+inventory     [shape = record, label = "{ inventory |  inventory_id : mediumint unsigned\l }"];
+language      [shape = record, label = "{ language |  language_id : tinyint unsigned\l }"];
+payment       [shape = record, label = "{ payment |  payment_id : smallint unsigned\l }"];
+rental        [shape = record, label = "{ rental |  rental_id : int\l }"];
+staff         [shape = record, label = "{ staff |  staff_id : tinyint unsigned\l }"];
+store         [shape = record, label = "{ store |  store_id : tinyint unsigned\l }"];
+
+address       -> city          [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "city_id", headlabel = ""];
+city          -> country       [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "country_id", headlabel = ""];
+customer      -> address       [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "address_id", headlabel = ""];
+customer      -> store         [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "store_id", headlabel = ""];
+film          -> language      [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "original_language_id:language_id", headlabel = ""];
+film          -> language      [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "language_id", headlabel = ""];
+film_actor    -> actor         [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "actor_id", headlabel = ""];
+film_actor    -> film          [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "film_id", headlabel = ""];
+film_category -> category      [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "category_id", headlabel = ""];
+film_category -> film          [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "film_id", headlabel = ""];
+inventory     -> film          [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "film_id", headlabel = ""];
+inventory     -> store         [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "store_id", headlabel = ""];
+payment       -> customer      [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "customer_id", headlabel = ""];
+payment       -> rental        [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "rental_id", headlabel = ""];
+payment       -> staff         [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "staff_id", headlabel = ""];
+rental        -> customer      [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "customer_id", headlabel = ""];
+rental        -> inventory     [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "inventory_id", headlabel = ""];
+rental        -> staff         [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "staff_id", headlabel = ""];
+staff         -> address       [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "address_id", headlabel = ""];
+staff         -> store         [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "store_id", headlabel = ""];
+store         -> address       [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "address_id", headlabel = ""];
+store         -> staff         [color = "#595959", style = solid , arrowtail = none    , arrowhead = normal  , taillabel = "", label = "manager_staff_id:staff_id", headlabel = ""];
+
+}
